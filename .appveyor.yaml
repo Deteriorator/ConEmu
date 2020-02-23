@@ -1,0 +1,32 @@
+image: Visual Studio 2017
+
+init:
+    - git config --global core.autocrlf input
+
+# clone_folder: c:\projects\conemu
+shallow_clone: true
+
+matrix:
+    fast_finish: false
+
+platform:
+    - x64
+    - x86
+
+configuration:
+    - Release
+
+environment:
+    matrix:
+        - TOOLCHAIN: msvc15
+
+build_script:
+    - cd src
+    - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+    - msbuild CE.sln /m /p:Configuration=Release,Platform=x64
+
+test_script:
+
+artifacts:
+# - path: <local-package-path>
+#  name: package_name
